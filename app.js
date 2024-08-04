@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3011
+const port = process.env.PORT || 3011
 // Get the client
 const cors = require('cors')
 const session = require('express-session')
@@ -11,6 +11,7 @@ const registro = require('./registro');
 const { obtenerUsuarios, eliminarUsuario } = require('./usuarios');
 const validar = require('./validar');
 const saltRounds = 10;
+mysql://root:mHYlgAdyRNZbimvfcFZJMrZIsYxavubi@viaduct.proxy.rlwy.net:14902/railway
 
 app.use(cors({
     origin: process.env.URLFRONTEND || 'http://localhost:5173',
@@ -19,7 +20,7 @@ app.use(cors({
 app.use(session({
     secret: process.env.SECRETSESSION || "prgjwpldgpsdgñlsdpgojwrpbhjldnbñsdnposnjdpl",
     proxy: process.env.NODE_ENV === 'production',
-        cookie: {
+    cookie: {
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'none'
     }
